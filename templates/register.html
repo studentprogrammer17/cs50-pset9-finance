@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post" onsubmit="return check();">
+        <div class="form-group">
+            <p class = "error_box" id = "message"></p>
+            <input autocomplete="off" autofocus class="form-control" id = "username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" id = "password" name="password" placeholder="Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+        </div>
+          <div class="form-group">
+            <input class="form-control" id ="repeat_password" name="repeat_password" placeholder="Repeat Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>
+        <style>
+
+        </style>
+        <script>
+
+        function check(){
+
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var repeat_password = document.getElementById("repeat_password");
+        var message = document.getElementById("message");
+
+
+        if(password.value != repeat_password.value)
+        {
+             document.querySelector("#message").innerHTML = ("Пароли не совпадают!");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;width: 20%;text-align: center;  margin-left: auto; margin-right: auto;";
+            return false;
+        }
+        if(username.value == ""){
+            document.querySelector("#message").innerHTML = ("Введите имя");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;width: 20%;text-align: center;  margin-left: auto; margin-right: auto;";
+
+            return false;
+
+        }
+          if(password.value == ""){
+            document.querySelector("#message").innerHTML = ("Введите пароль");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+            return false;
+        }
+
+        }
+
+
+        $('input').on('input invalid', function() {
+        this.setCustomValidity('')
+        if (this.validity.valueMissing) {
+          this.setCustomValidity("Введите пароль")
+        }
+        if (this.validity.patternMismatch) {
+          this.setCustomValidity("Пароль должен содержать хотя бы 6 символов, 1 заглавную букву и 1 строчную букву")
+        }
+})
+
+
+        </script>
+{% endblock %}

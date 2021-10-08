@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main Page
+{% endblock %}
+
+{% block main %}
+                <p>Your money - {{ money }}</p>
+
+
+                {% if not holding or holding[shares] == 0 %}
+                <p>No stocks available</p>
+                {% endif %}
+
+                {% if holding %}
+                <p>All stock(s) cost with your money - {{ all_cash }}</p>
+             <div class = "table_stocks">
+            <table>
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in holding %}
+                <tr>
+                    <td>{{i["name"]}}</td>
+                    <td>{{i["symbol"]}}</td>
+                    <td>{{i["shares"]}}</td>
+                    <td>{{i["price"]}}</td>
+                    <td>{{i["hold"]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </div>
+        </table>
+        {% endif %}
+        <form action="/" method="post"  onsubmit="return check();">
+        <p id = "message"></p>
+        <input autocomplete="off" id = "password" autofocus class="form-control"  type = "text" name = "password"  placeholder= "Password" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" pattern="^[0-9]+$" required>
+        <button onclick="check_password()" id = "check_pass" class="btn btn-primary" type = "submit">Check</button>
+        <p id = "title_type_pass">For adding money, type password</p>
+
+        <input autocomplete="off" id = "add_money" autofocus class="form-control"  type = "text" hidden = "true" name = "add_money"  placeholder= "Number" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" pattern="^[0-9]+$" required>
+        <button  id = "but_add_money" class="btn btn-primary" hidden = "true" type = "submit">Add money</button>
+        </form>
+
+        <script>
+        function check_password(){
+            var password = document.getElementById("password");
+            var money = document.getElementById("add_money");
+            var but_add_money = document.getElementById("but_add_money");
+            var check_pass = document.getElementById("check_pass");
+            var title_type_pass = document.getElementById("title_type_pass");
+            var message = document.getElementById("message");
+
+
+            if(password.value == 96713)
+            {
+                money.hidden = false;
+                but_add_money.hidden = false;
+                check_pass.hidden = true;
+                password.hidden = true;
+                title_type_pass.hidden = true;
+                message.hidden = true;
+            }
+            else{
+            document.querySelector("#message").innerHTML = ("Неверный пароль");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+            }
+
+        }
+
+
+
+        function check(){
+        var money = document.getElementById("add_money");
+        var message = document.getElementById("message");
+        var message = document.getElementById("message");
+        var but_add_money = document.getElementById("but_add_money");
+
+
+
+
+        if(money.value > 1000000){
+            document.querySelector("#message").innerHTML = ("Слишком много хочешь");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+
+            return false;
+
+        }
+        }
+        </script>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post"  onsubmit="return check();">
+        <div class="form-group">
+        <p id = "message"></p>
+        <input autocomplete="off" id = "symbol" autofocus class="form-control"  type = "text" name = "symbol"  placeholder= "Input symbol">
+        </div>
+        <button class="btn btn-primary" type = "submit">Send</button>
+    </form>
+
+    <script>
+
+    function check(){
+
+    var symbol = document.getElementById("symbol");
+    var message = document.getElementById("message");
+      if(symbol.value == ""){
+            document.querySelector("#message").innerHTML = ("Введите символ акции");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+
+            return false;
+
+        }
+    }
+
+    </script>
+
+{% endblock %}

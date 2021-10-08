@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+
+             <div class = "table_stocks">
+            <table>
+            <thead>
+                <tr>
+                    <th>The Company Name</th>
+                    <th>Stock's Symbol</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{look_up['name']}}</td>
+                    <td>({{look_up['symbol']}})</td>
+                    <td>{{look_up['price']}}</td>
+                </tr>
+            </tbody>
+            </div>
+        </table>
+
+
+
+
+{% endblock %}

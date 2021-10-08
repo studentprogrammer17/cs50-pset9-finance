@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+                {% if not history %}
+                <p>No transactions<p>
+                    {% endif %}
+             <div class = "table_stocks">
+                 {% if  history %}
+            <table>
+            <thead>
+                <tr>
+                    <th>Stock's Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in history %}
+                <tr>
+                    <td>{{i["symbol"]}}</td>
+                    <td>{{i["shares"]}}</td>
+                    <td>{{i["price"]}}$</td>
+                    <td>{{i["time"]}}</td>
+                    <td>{{i["Action"]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </div>
+        </table>
+        {% endif %}
+
+
+
+
+{% endblock %}

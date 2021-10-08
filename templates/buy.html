@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" method="post" onsubmit="return check();">
+        <div class="form-group">
+            <p id = "message"></p>
+            <p>Your money - {{ money }}</p>
+            <input autocomplete="off" autofocus class="form-control" id="symbol" name="symbol" placeholder="Input Symbol" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" autocomplete="off" id = "shares" name="shares" placeholder="Shares" type="text" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" pattern="^[0-9]+$" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>
+
+    <script>
+    function check(){
+    var symbol = document.getElementById("symbol");
+    var shares = document.getElementById("shares");
+    var message = document.getElementById("message");
+
+      if(symbol.value == ""){
+            document.querySelector("#message").innerHTML = ("Введите символ акции");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+            return false;
+        }
+        else if(shares.value == ""){
+            document.querySelector("#message").innerHTML = ("Введите кол-во акций, которые вы хотите купить");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+            return false;
+        }
+         else if(shares.value <= 0){
+            document.querySelector("#message").innerHTML = ("Кол-во акций не может быть отрицательным либо быть равным 0");
+            document.querySelector("#message").style.backgroundColor = ("red");
+            message.style.cssText =
+            "color: #DC143C;text-align: center;  margin-left: auto; margin-right: auto;";
+            return false;
+        }
+
+    }
+
+    </script>
+
+{% endblock %}
